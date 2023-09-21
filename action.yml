@@ -1,30 +1,28 @@
-name: "Lookup Table Action POC"
+name: "Leap Query Lookup"
 author: RapidCircle
-description: "Get Lookup Table Value"
+description: "Get Lookup Value"
 inputs:
-  GitHubToken:
-    description: "Github Token"
-    required: false
   TenantId:
     description: "TenantId"
-    required: false
+    required: true
   ClientId:
     description: "ClientId"
-    required: false
+    required: true
   ClientSecret:
     description: "ClientSecret"
-    required: false
+    required: true
+  ServiceIdentifier:
+    description: "Lookup Service Identifier"
+    required: true
   TableName:
     description: "Name of the lookup table"
     required: true
-    default: "Business"
   Query:
     description: "Lookup table query"
     required: false
   Column:
     description: "Name of the column"
     required: false
-    default: "BusinessName"
 outputs:
   LookupTableValueJSON:
     description: "Lookup Value"
@@ -33,26 +31,19 @@ runs:
   using: "composite"
   steps:
     - name: Check out action repo
-      uses: actions/checkout@main
+      uses: actions/checkout@dev
       with:
-        repository: joshinagesh/PowerShell-Action-Demo
+        repository: RapidCircle/leap-lookup-query
     - name: Query Lookup Table
       id: fetch-lookup-value
       shell: pwsh
       env:
         LookupResourceId: 6046ae5b-af14-4f76-9c06-cda61515880a
-      run:
-        ${{ github.action_path }}/Actions/Get-LookupTableOutput/Get-LookupTableOutput.ps1 `
+      run: ${{ github.action_path }}/script/Get-LookupTableOutput.ps1 `
         -TableName ${{ inputs.TableName }} `
         -Query ${{ inputs.Query }} `
         -Column ${{ inputs.Column }} `
-        -GitHubToken ${{ inputs.GitHubToken }} `
         -TenantId ${{ inputs.TenantId }} `
         -ClientId ${{ inputs.ClientId }} `
         -ClientSecret ${{ inputs.ClientSecret }}
-    # - run: echo "${{env.LookupValueJSONEnv.ResourceType }}"
-    #   shell: bash
-    - run: echo "${{fromJson( steps.fetch-lookup-value.outputs.LookupValue).ResourceType }}"
-      shell: bash
-    - run: echo "${{fromJson( steps.fetch-lookup-value.outputs.LookupValue).ShortCode }}"
-      shell: bash
+        -ServiceIdentifier ${{ inputs.ServiceIdentifier }}
