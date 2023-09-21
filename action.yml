@@ -1,0 +1,58 @@
+name: "Lookup Table Action POC"
+author: RapidCircle
+description: "Get Lookup Table Value"
+inputs:
+  GitHubToken:
+    description: "Github Token"
+    required: false
+  TenantId:
+    description: "TenantId"
+    required: false
+  ClientId:
+    description: "ClientId"
+    required: false
+  ClientSecret:
+    description: "ClientSecret"
+    required: false
+  TableName:
+    description: "Name of the lookup table"
+    required: true
+    default: "Business"
+  Query:
+    description: "Lookup table query"
+    required: false
+  Column:
+    description: "Name of the column"
+    required: false
+    default: "BusinessName"
+outputs:
+  LookupTableValueJSON:
+    description: "Lookup Value"
+    value: ${{ steps.fetch-lookup-value.outputs.LookupValue }}
+runs:
+  using: "composite"
+  steps:
+    - name: Check out action repo
+      uses: actions/checkout@main
+      with:
+        repository: joshinagesh/PowerShell-Action-Demo
+    - name: Query Lookup Table
+      id: fetch-lookup-value
+      shell: pwsh
+      env:
+        LookupResourceId: 6046ae5b-af14-4f76-9c06-cda61515880a
+      run:
+        ${{ github.action_path }}/Actions/Get-LookupTableOutput/Get-LookupTableOutput.ps1 `
+        -TableName ${{ inputs.TableName }} `
+        -Query ${{ inputs.Query }} `
+        -Column ${{ inputs.Column }} `
+        -GitHubToken ${{ inputs.GitHubToken }} `
+        -TenantId ${{ inputs.TenantId }} `
+        -ClientId ${{ inputs.ClientId }} `
+        -ClientSecret ${{ inputs.ClientSecret }}
+    # - run: echo "${{env.LookupValueJSONEnv.ResourceType }}"
+    #   shell: bash
+    - run: echo "${{fromJson( steps.fetch-lookup-value.outputs.LookupValue).ResourceType }}"
+      shell: bash
+    - run: echo "${{fromJson( steps.fetch-lookup-value.outputs.LookupValue).ShortCode }}"
+      shell: bash
