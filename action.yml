@@ -31,9 +31,10 @@ runs:
   using: "composite"
   steps:
     - name: Check out action repo
-      uses: actions/checkout@dev
+      uses: actions/checkout@v2
       with:
         repository: RapidCircle/leap-lookup-query
+        path: dev
     - name: Query Lookup Table
       id: fetch-lookup-value
       shell: pwsh
