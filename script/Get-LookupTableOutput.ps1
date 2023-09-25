@@ -13,6 +13,7 @@ $GitHubToken
 $TableName
 $Column
 $Query
+$ServiceIdentifier
 
 Write-Host "Fetching lookup details from Table: $($TableName)"
 Write-Host "Query: $($Query)"

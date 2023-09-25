@@ -47,5 +47,5 @@ runs:
         -Column ${{ inputs.Column }} `
         -TenantId ${{ inputs.TenantId }} `
         -ClientId ${{ inputs.ClientId }} `
-        -ClientSecret ${{ inputs.ClientSecret }}
+        -ClientSecret ${{ inputs.ClientSecret }} `
         -ServiceIdentifier ${{ inputs.ServiceIdentifier }}
