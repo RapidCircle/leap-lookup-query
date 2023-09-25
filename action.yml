@@ -31,7 +31,7 @@ runs:
   using: "composite"
   steps:
     - name: Check out action repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: RapidCircle/leap-lookup-query
         path: dev
