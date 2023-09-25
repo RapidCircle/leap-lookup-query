@@ -41,11 +41,11 @@ runs:
       env:
         LookupResourceId: 6046ae5b-af14-4f76-9c06-cda61515880a
         HostURL: "https://staging-dna-lkup-api.azurewebsites.net"
-      run: ${{ github.action_path }}/script/Get-LookupTableOutput.ps1 `
+      run: ${{ github.action_path }}/script/Query-LookupTable.ps1 `
         -TableName ${{ inputs.TableName }} `
         -Query ${{ inputs.Query }} `
         -Column ${{ inputs.Column }} `
         -TenantId ${{ inputs.TenantId }} `
         -ClientId ${{ inputs.ClientId }} `
         -ClientSecret ${{ inputs.ClientSecret }} `
-        -ServiceIdentifier ${{ inputs.ServiceIdentifier }}
+        -LookupServiceIdentifier ${{ inputs.LookupServiceIdentifier }}
