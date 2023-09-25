@@ -39,6 +39,7 @@ runs:
       shell: pwsh
       env:
         LookupResourceId: 6046ae5b-af14-4f76-9c06-cda61515880a
+        HostURL: "https://staging-dna-lkup-api.azurewebsites.net"
       run: ${{ github.action_path }}/script/Get-LookupTableOutput.ps1 `
         -TableName ${{ inputs.TableName }} `
         -Query ${{ inputs.Query }} `

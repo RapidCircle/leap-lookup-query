@@ -42,7 +42,7 @@ catch {
 
 Write-Host "Getting lookup values"
 try {
-    $Uri = "https://staging-dna-lkup-api.azurewebsites.net/api/Lookup/odata/$($TableName)?`$filter=$Query"
+    $Uri = "$($env:HostURL)/api/Lookup/odata/$($TableName)?`$filter=$Query"
 
     $reqHeaders = @{
         "Authorization" = "Bearer $($access_token)";
