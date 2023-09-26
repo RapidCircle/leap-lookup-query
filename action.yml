@@ -11,7 +11,7 @@ inputs:
   ClientSecret:
     description: "ClientSecret"
     required: true
-  ServiceIdentifier:
+  LookupServiceIdentifier:
     description: "Lookup Service Identifier"
     required: true
   TableName:
