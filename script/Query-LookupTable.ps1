@@ -7,9 +7,6 @@ function Get-LookupValue {
         [Parameter(Mandatory = $false)]
         [string] $Query,
 
-        [Parameter(Mandatory = $false)]
-        [string] $Column,
-
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string] $TenantId,
@@ -30,7 +27,6 @@ function Get-LookupValue {
     #$GitHubToken
 
     $TableName
-    $Column
     $Query
     $LookupServiceIdentifier
 
@@ -88,6 +84,6 @@ function Get-LookupValue {
     }
 }
 
-Get-LookupValue -TableName $TableName -Query $Query -Column $Column `
+Get-LookupValue -TableName $TableName -Query $Query `
     -TenantId $TenantId ClientId $ClientId -ClientSecret $ClientSecret `
     -LookupServiceIdentifier $LookupServiceIdentifier

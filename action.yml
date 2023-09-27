@@ -19,11 +19,7 @@ inputs:
     required: true
   Query:
     description: "Lookup table query"
-    required: false
-    default: ""
-  Column:
-    description: "Name of the column"
-    required: false
+    required: true
     default: ""
 outputs:
   LookupTableValueJSON:
@@ -46,7 +42,6 @@ runs:
       run: ${{ github.action_path }}/script/Query-LookupTable.ps1 `
         -TableName ${{ inputs.TableName }} `
         -Query ${{ inputs.Query }} `
-        -Column ${{ inputs.Column }} `
         -TenantId ${{ inputs.TenantId }} `
         -ClientId ${{ inputs.ClientId }} `
         -ClientSecret ${{ inputs.ClientSecret }} `
