@@ -20,9 +20,11 @@ inputs:
   Query:
     description: "Lookup table query"
     required: false
+    default: ''
   Column:
     description: "Name of the column"
     required: false
+    default: ''
 outputs:
   LookupTableValueJSON:
     description: "Lookup Value"
