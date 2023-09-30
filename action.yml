@@ -19,7 +19,7 @@ inputs:
     required: true
   Query:
     description: "Lookup table query"
-    required: true
+    required: false
     default: ""
 outputs:
   LookupTableValueJSON:
