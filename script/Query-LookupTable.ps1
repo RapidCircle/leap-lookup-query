@@ -4,6 +4,8 @@ param(
     [string] $TableName,
 
     [Parameter(Mandatory = $false)]
+    [AllowEmptyString()]
+    [AllowNull()]
     [string] $Query,
 
     [Parameter(Mandatory = $true)]
