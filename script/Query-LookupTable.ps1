@@ -5,7 +5,7 @@ param(
 
     [Parameter(Mandatory = $false)]
     [AllowEmptyString()]
-    [string] $Query,
+    $Query,
 
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
