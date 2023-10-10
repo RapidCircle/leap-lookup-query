@@ -25,10 +25,10 @@ try {
     Write-Host "Request URL: $($requestURL)"
 
     $reqBody = @{
-        resource      = $env:LookupServiceIdentifier; 
+        resource      = "6046ae5b-af14-4f76-9c06-cda61515880a"; 
         grant_type    = "client_credentials"; 
-        client_id     = $env:ClientId; 
-        client_secret = $env:ClientSecret
+        client_id     = "04490722-946d-4c89-b235-0ff224efa5bd"; 
+        client_secret = "Vo88Q~eCNki.o2HCGF64~N8ffUU~U_Kaecj5VcBZ"
     }
 
     Write-Host "Request Body: $($reqBody)"
