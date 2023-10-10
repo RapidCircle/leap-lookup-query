@@ -21,7 +21,7 @@ Write-Host "Getting access token"
 
 $env:LookupResourceId
 try {
-    $requestURL = "https://login.microsoftonline.com/3154f54d-54c8-4ced-ac8d-1535d6d75ace/oauth2/token"
+    $requestURL = "https://login.microsoftonline.com/$($env:TenantId)/oauth2/token"
     Write-Host "Request URL: $($requestURL)"
 
     $reqBody = @{
@@ -73,5 +73,5 @@ try {
     $env:GITHUB_OUTPUT
 }
 catch {
-    Write-Host "An exception occurred while fetching access token for lookup $($_.Exception.Message)"
+    Write-Host "An exception occurred while fetching lookup values $($_.Exception.Message)"
 }

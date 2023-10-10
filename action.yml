@@ -32,12 +32,11 @@ runs:
       id: fetch-lookup-value
       shell: pwsh
       env:
-        LookupResourceId: 6046ae5b-af14-4f76-9c06-cda61515880a
         HostURL: "https://staging-dna-lkup-api.azurewebsites.net"
-        TableName: ${{ inputs.TableName }} `
-        Query: ${{ inputs.Query }} `
-        TenantId: ${{ inputs.TenantId }} `
-        ClientId: ${{ inputs.ClientId }} `
-        ClientSecret: ${{ inputs.ClientSecret }} `
+        TableName: ${{ inputs.TableName }}
+        Query: ${{ inputs.Query }}
+        TenantId: ${{ inputs.TenantId }}
+        ClientId: ${{ inputs.ClientId }}
+        ClientSecret: ${{ inputs.ClientSecret }}
         LookupServiceIdentifier: ${{ inputs.LookupServiceIdentifier }}
       run: ${{ github.action_path }}/script/Query-LookupTable.ps1
