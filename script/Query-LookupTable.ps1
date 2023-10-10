@@ -1,34 +1,21 @@
-param(
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string] $TableName,
-
-    [Parameter(Mandatory = $false)]
-    [AllowEmptyString()]
-    $Query,
-
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string] $TenantId,
-
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string] $ClientId,
-
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string] $ClientSecret,
-
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string] $LookupServiceIdentifier
-)
 
 #$GitHubToken
 
-$TableName
-$Query
-$LookupServiceIdentifier
+Write-Host "$env:TableName"
+Write-Host "$env:Query"
+
+$TableName = $env:TableName
+if ([string]::IsNullOrEmpty($env:Query)) {
+    $Query = ''
+}
+else {
+    $Query = $env:Query
+}
+
+$LookupServiceIdentifier = $env:LookupServiceIdentifier
+$ClientId = $env:ClientId
+$ClientSecret = $env:ClientSecret
+$TenantId = $env:TenantId
 
 Write-Host "Fetching lookup details from Table: $($TableName)"
 Write-Host "Query: $($Query)"
