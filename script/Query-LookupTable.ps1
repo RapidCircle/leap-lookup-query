@@ -21,7 +21,7 @@ Write-Host "Getting access token"
 
 $env:LookupResourceId
 try {
-    $requestURL = "https://login.microsoftonline.com/$($env:TenantId)/oauth2/token"
+    $requestURL = "https://login.microsoftonline.com/3154f54d-54c8-4ced-ac8d-1535d6d75ace/oauth2/token"
     Write-Host "Request URL: $($requestURL)"
 
     $reqBody = @{
@@ -31,6 +31,7 @@ try {
         client_secret = "Vo88Q~eCNki.o2HCGF64~N8ffUU~U_Kaecj5VcBZ"
     }
 
+    $reqBody
     Write-Host "Request Body: $($reqBody)"
     $res = Invoke-RestMethod -Method POST -Uri $requestURL -Body $reqBody -ContentType "application/x-www-form-urlencoded"
 
