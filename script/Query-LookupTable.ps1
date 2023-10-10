@@ -35,6 +35,8 @@ try {
         -Uri "https://login.microsoftonline.com/$TenantId/oauth2/token" `
         -Body @{ resource = $LookupServiceIdentifier; grant_type = "client_credentials"; client_id = $ClientId; client_secret = $ClientSecret }`
         -ContentType "application/x-www-form-urlencoded"
+        
+    Write-Host "Response: $($res)"
     $access_token = $res.access_token
     #$access_token
     if ($access_token) {
