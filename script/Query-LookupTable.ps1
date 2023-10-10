@@ -12,10 +12,10 @@ else {
     $Query = $env:Query
 }
 
-$LookupServiceIdentifier = $env:LookupServiceIdentifier
-$ClientId = $env:ClientId
-$ClientSecret = $env:ClientSecret
-$TenantId = $env:TenantId
+$LookupServiceIdentifier = "$env:LookupServiceIdentifier"
+$ClientId = "$env:ClientId"
+$ClientSecret = "$env:ClientSecret"
+$TenantId = "$env:TenantId"
 
 Write-Host "Fetching lookup details from Table: $($TableName)"
 Write-Host "Query: $($Query)"
@@ -31,8 +31,8 @@ Write-Host "Getting access token"
 
 $env:LookupResourceId
 try {
-    $requestURL = "https://login.microsoftonline.com/$TenantId/oauth2/token"
-    Write-Host "Request Body: $($requestURL)"
+    $requestURL = "https://login.microsoftonline.com/$($TenantId)/oauth2/token"
+    Write-Host "Request URL: $($requestURL)"
 
     $reqBody = @{
         resource      = $LookupServiceIdentifier; 
