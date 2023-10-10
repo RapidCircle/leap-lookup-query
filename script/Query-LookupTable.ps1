@@ -25,14 +25,13 @@ try {
     Write-Host "Request URL: $($requestURL)"
 
     $reqBody = @{
-        resource      = "6046ae5b-af14-4f76-9c06-cda61515880a"; 
+        resource      = $env:LookupServiceIdentifier; 
         grant_type    = "client_credentials"; 
-        client_id     = "04490722-946d-4c89-b235-0ff224efa5bd"; 
-        client_secret = "Vo88Q~eCNki.o2HCGF64~N8ffUU~U_Kaecj5VcBZ"
+        client_id     = $env:ClientId; 
+        client_secret = $env:ClientSecret
     }
 
     $reqBody
-    Write-Host "Request Body: $($reqBody)"
     $res = Invoke-RestMethod -Method POST -Uri $requestURL -Body $reqBody -ContentType "application/x-www-form-urlencoded"
 
     Write-Host "Response: $($res)"
