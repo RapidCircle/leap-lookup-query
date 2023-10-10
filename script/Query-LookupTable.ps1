@@ -20,6 +20,11 @@ $TenantId = $env:TenantId
 Write-Host "Fetching lookup details from Table: $($TableName)"
 Write-Host "Query: $($Query)"
 
+Write-Host "LookupServiceIdentifier: $($LookupServiceIdentifier)"
+Write-Host "TenantId: $($TenantId)"
+Write-Host "ClientId: $($ClientId)"
+Write-Host "ClientSecret: $($ClientSecret)"
+
 
 #################################################################################################################
 Write-Host "Getting access token"
@@ -37,7 +42,8 @@ try {
     }
 }
 catch {
-    Write-Host "An exception occurred while fetching access token for lookup $($_.Exception.Message)"
+    Write-Host "An exception occurred while fetching access token for lookup: $($_.Exception.Message)"
+    throw "An exception occurred while fetching access token for lookup: $($_.Exception.Message)"
 }
 
 #################################################################################################################
