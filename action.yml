@@ -21,6 +21,9 @@ inputs:
     description: "Lookup table query"
     required: false
     default: ""
+  FirstOrDefault:
+    description: "If this flag is set to false, get all items that meet query from Lookup table"
+    required: false
 outputs:
   LookupTableValueJSON:
     description: "Lookup Value"
@@ -39,4 +42,5 @@ runs:
         ClientId: ${{ inputs.ClientId }}
         ClientSecret: ${{ inputs.ClientSecret }}
         LookupServiceIdentifier: ${{ inputs.LookupServiceIdentifier }}
+        FirstOrDefault: ${{ inputs.FirstOrDefault }}
       run: ${{ github.action_path }}/script/Query-LookupTable.ps1

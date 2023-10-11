@@ -12,6 +12,15 @@ else {
     $Query = $env:Query
 }
 
+if ([string]::IsNullOrEmpty($env:FirstOrDefault)) {
+    Write-Host "$env:FirstOrDefault is empty, setting it to false"
+    $FirstOrDefault = $false
+}
+else {
+    $env:FirstOrDefault
+    $FirstOrDefault = $env:FirstOrDefault
+}
+
 Write-Host "Fetching lookup details from Table: $($TableName)"
 Write-Host "Query: $($Query)"
 
@@ -22,7 +31,6 @@ Write-Host "Getting access token"
 $env:LookupResourceId
 try {
     $requestURL = "https://login.microsoftonline.com/$($env:TenantId)/oauth2/token"
-    Write-Host "Request URL: $($requestURL)"
 
     $reqBody = @{
         resource      = $env:LookupServiceIdentifier; 
@@ -31,7 +39,6 @@ try {
         client_secret = $env:ClientSecret
     }
 
-    $reqBody
     $res = Invoke-RestMethod -Method POST -Uri $requestURL -Body $reqBody -ContentType "application/x-www-form-urlencoded"
 
     Write-Host "Response: $($res)"
@@ -63,7 +70,14 @@ try {
     $lookupResponse
 
     if ($lookupResponse) {
-        $LkupValue = $lookupResponse | ConvertTo-Json -Compress
+        if ($FirstOrDefault) {
+            $LkupValue = $lookupResponse[0]
+            $LkupValue = $LkupValue | ConvertTo-Json -Compress
+        }
+        else {
+            $LkupValue = $lookupResponse | ConvertTo-Json -Compress
+        }
+        
     }
     
     $LkupValue
