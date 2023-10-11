@@ -76,8 +76,8 @@ try {
             $LkupValue = $LkupValue | ConvertTo-Json -Compress
         }
         else {
+            $lookupResponse = @($lookupResponse)
             $LkupValue = $lookupResponse | ConvertTo-Json -Compress
-            $LkupValue = @($LkupValue)
         }
     }
     
