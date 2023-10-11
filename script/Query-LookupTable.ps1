@@ -14,11 +14,11 @@ else {
 
 if ([string]::IsNullOrEmpty($env:FirstOrDefault)) {
     Write-Host "$env:FirstOrDefault is empty, setting it to false"
-    $FirstOrDefault = $false
+    $FirstOrDefault = 'false'
 }
 else {
     $env:FirstOrDefault
-    $FirstOrDefault = $env:FirstOrDefault
+    $FirstOrDefault = $env:FirstOrDefault.toLower()
 }
 
 Write-Host "Fetching lookup details from Table: $($TableName)"
@@ -70,14 +70,14 @@ try {
     $lookupResponse
 
     if ($lookupResponse) {
-        if ($FirstOrDefault) {
+        if ($FirstOrDefault -eq 'true') {
+            Write-Host "FirstOrDefault is set to true, returning first item from the response array"
             $LkupValue = $lookupResponse[0]
             $LkupValue = $LkupValue | ConvertTo-Json -Compress
         }
         else {
             $LkupValue = $lookupResponse | ConvertTo-Json -Compress
         }
-        
     }
     
     $LkupValue
