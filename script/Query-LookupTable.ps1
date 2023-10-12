@@ -62,6 +62,7 @@ catch {
 Write-Host "Getting lookup values"
 try {
     $Uri = "$($env:HostURL)/api/Lookup/odata/$($TableName)?`$filter=$Query"
+    $Uri
 
     $reqHeaders = @{
         "Authorization" = "Bearer $($access_token)";
