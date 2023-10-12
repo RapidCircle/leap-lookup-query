@@ -19,6 +19,9 @@ if ([string]::IsNullOrEmpty($env:FirstOrDefault)) {
 else {
     $env:FirstOrDefault
     $FirstOrDefault = $env:FirstOrDefault.toLower()
+    if ($FirstOrDefault -eq 'true') {
+        $Query = $Query+'&$top=1'
+    }
 }
 
 Write-Host "Fetching lookup details from Table: $($TableName)"
@@ -72,12 +75,13 @@ try {
     if ($lookupResponse) {
         if ($FirstOrDefault -eq 'true') {
             Write-Host "FirstOrDefault is set to true, returning first item from the response array"
-            $LkupValue = $lookupResponse[0]
-            $LkupValue = $LkupValue | ConvertTo-Json -Compress
+            #$LkupValue = $lookupResponse[0]
+            $LkupValue = $lookupResponse | ConvertTo-Json -Compress
         }
         else {
-            $lookupResponse = @($lookupResponse)
-            $LkupValue = $lookupResponse | ConvertTo-Json -Compress
+            $lookupResponseArray = @()
+            $lookupResponseArray+=$lookupResponse
+            $LkupValue = $lookupResponseArray | ConvertTo-Json -Compress
         }
     }
     
