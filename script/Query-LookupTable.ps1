@@ -81,9 +81,8 @@ try {
         }
         else {
             Write-Host "FirstOrDefault is set to false, returning output as an array"
-            $lookupResponse = [array]$lookupResponse
-            $lookupResponse
-            $LkupValue = $lookupResponse | ConvertTo-Json -Compress
+            $LkupValue = $lookupResponse | ConvertTo-Json -Compress -AsArray
+            $LkupValue
         }
     }
     
