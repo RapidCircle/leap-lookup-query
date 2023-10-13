@@ -71,7 +71,7 @@ try {
 
     $lookupResponse = Invoke-RestMethod -Method GET -Uri $Uri -Headers $reqHeaders
 
-    $lookupResponse
+    #$lookupResponse
 
     if ($lookupResponse) {
         if ($FirstOrDefault -eq 'true') {
@@ -81,7 +81,9 @@ try {
         }
         else {
             Write-Host "FirstOrDefault is set to false, returning output as an array"
-            $LkupValue = @($lookupResponse | ConvertTo-Json -Compress)
+            $lookupResponse = [array]$lookupResponse
+            $lookupResponse
+            $LkupValue = $lookupResponse | ConvertTo-Json -Compress
         }
     }
     
