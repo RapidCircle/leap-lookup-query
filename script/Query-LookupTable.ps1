@@ -80,11 +80,8 @@ try {
             $LkupValue = $lookupResponse | ConvertTo-Json -Compress
         }
         else {
-            Write-Host "FirstOrDefault is set to false, returning output as an JSON array"
-            $lookupResponseArray = @()
-            $lookupResponseArray += $lookupResponse
-            $lookupResponseArray
-            $LkupValue = $lookupResponseArray | ConvertTo-Json -Compress
+            Write-Host "FirstOrDefault is set to false, returning output as an array"
+            $LkupValue = @($lookupResponse | ConvertTo-Json -Compress)
         }
     }
     
