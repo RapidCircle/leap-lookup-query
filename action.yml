@@ -14,6 +14,9 @@ inputs:
   LookupServiceIdentifier:
     description: "Lookup Service Identifier"
     required: true
+  HostURL:
+    description: "HostURL"
+    required: true
   TableName:
     description: "Name of the lookup table"
     required: true
@@ -35,7 +38,7 @@ runs:
       id: fetch-lookup-value
       shell: pwsh
       env:
-        HostURL: "https://staging-dna-lkup-api.azurewebsites.net"
+        HostURL: ${{ inputs.HostURL }}
         TableName: ${{ inputs.TableName }}
         Query: ${{ inputs.Query }}
         TenantId: ${{ inputs.TenantId }}

@@ -44,11 +44,15 @@ try {
 
     $res = Invoke-RestMethod -Method POST -Uri $requestURL -Body $reqBody -ContentType "application/x-www-form-urlencoded"
 
-    Write-Host "Response: $($res)"
-    $access_token = $res.access_token
-    #$access_token
-    if ($access_token) {
-        Write-Host "Access token fetched successfully"
+    if (![string]::IsNullOrEmpty($res)) {
+        $access_token = $res.access_token
+        if ($access_token) {
+            Write-Host "Access token fetched successfully"
+        }    
+    }
+    else {
+        Write-Error "Unable to fetch the access token"
+        throw "Unable to fetch the access token"
     }
 }
 catch {
@@ -82,7 +86,7 @@ try {
         else {
             Write-Host "FirstOrDefault is set to false, returning output as an array"
             $LkupValue = $lookupResponse | ConvertTo-Json -Compress -AsArray
-            $LkupValue
+            #$LkupValue
         }
     }
     
