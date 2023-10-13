@@ -20,7 +20,7 @@ else {
     $env:FirstOrDefault
     $FirstOrDefault = $env:FirstOrDefault.toLower()
     if ($FirstOrDefault -eq 'true') {
-        $Query = $Query+'&$top=1'
+        $Query = $Query + '&$top=1'
     }
 }
 
@@ -80,8 +80,10 @@ try {
             $LkupValue = $lookupResponse | ConvertTo-Json -Compress
         }
         else {
+            Write-Host "FirstOrDefault is set to false, returning output as an JSON array"
             $lookupResponseArray = @()
-            $lookupResponseArray+=$lookupResponse
+            $lookupResponseArray += $lookupResponse
+            $lookupResponseArray
             $LkupValue = $lookupResponseArray | ConvertTo-Json -Compress
         }
     }
