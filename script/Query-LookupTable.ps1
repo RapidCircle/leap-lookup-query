@@ -1,11 +1,9 @@
 
 #$GitHubToken
 
-Write-Host "$env:TableName"
-Write-Host "$env:Query"
-
 $TableName = $env:TableName
 if ([string]::IsNullOrEmpty($env:Query)) {
+    Write-Host "Query parameter is null, setting it to empty string"
     $Query = ''
 }
 else {
@@ -13,13 +11,14 @@ else {
 }
 
 if ([string]::IsNullOrEmpty($env:FirstOrDefault)) {
-    Write-Host "$env:FirstOrDefault is empty, setting it to false"
+    Write-Host "FirstOrDefault flag is null/empty, setting it to false"
     $FirstOrDefault = 'false'
 }
 else {
     $env:FirstOrDefault
     $FirstOrDefault = $env:FirstOrDefault.toLower()
     if ($FirstOrDefault -eq 'true') {
+        Write-Host "FirstOrDefault is set to true, updated query to return only top item"
         $Query = $Query + '&$top=1'
     }
 }
@@ -31,7 +30,6 @@ Write-Host "Query: $($Query)"
 #################################################################################################################
 Write-Host "Getting access token"
 
-$env:LookupResourceId
 try {
     $requestURL = "https://login.microsoftonline.com/$($env:TenantId)/oauth2/token"
 
@@ -79,8 +77,7 @@ try {
 
     if ($lookupResponse) {
         if ($FirstOrDefault -eq 'true') {
-            Write-Host "FirstOrDefault is set to true, returning first item from the response array"
-            #$LkupValue = $lookupResponse[0]
+            Write-Host "FirstOrDefault is set to true, returning response object"
             $LkupValue = $lookupResponse | ConvertTo-Json -Compress
         }
         else {
@@ -92,9 +89,10 @@ try {
     
     $LkupValue
 
+    Write-Host "Setting JSON Object/Array as Github output"
     Write-Output "LookupValue=$LkupValue" >> $env:GITHUB_OUTPUT
 
-    $env:GITHUB_OUTPUT
+    #$env:GITHUB_OUTPUT
 }
 catch {
     Write-Host "An exception occurred while fetching lookup values $($_.Exception.Message)"
