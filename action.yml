@@ -34,10 +34,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: validate-inputs
-      shell: bash
-      run: |
-        [[ "${{ inputs.TableName }}" ]] || { echo "TableName input is required" ; exit 1; }
     - name: Query Lookup Table
       id: fetch-lookup-value
       shell: pwsh

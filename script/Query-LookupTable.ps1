@@ -1,5 +1,34 @@
 
-#$GitHubToken
+#Check if required inputs are null/empty
+if ([string]::IsNullOrEmpty($env:TableName)) {
+    Write-Error "TableName input is required"
+    throw "TableName input is required"
+}
+
+if ([string]::IsNullOrEmpty($env:ClientId)) {
+    Write-Error "ClientId input is required"
+    throw "ClientId input is required"
+}
+
+if ([string]::IsNullOrEmpty($env:ClientSecret)) {
+    Write-Error "ClientSecret input is required"
+    throw "ClientSecret input is required"
+}
+
+if ([string]::IsNullOrEmpty($env:TenantId)) {
+    Write-Error "TenantId input is required"
+    throw "TenantId input is required"
+}
+
+if ([string]::IsNullOrEmpty($env:LookupServiceIdentifier)) {
+    Write-Error "LookupServiceIdentifier input is required"
+    throw "LookupServiceIdentifier input is required"
+}
+
+if ([string]::IsNullOrEmpty($env:HostURL)) {
+    Write-Error "HostURL input is required"
+    throw "HostURL input is required"
+}
 
 $TableName = $env:TableName
 if ([string]::IsNullOrEmpty($env:Query)) {
