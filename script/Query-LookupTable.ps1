@@ -54,7 +54,7 @@ try {
     }
 }
 catch {
-    Write-Host "An exception occurred while fetching access token for lookup: $($_.Exception.Message)"
+    Write-Error "An exception occurred while fetching access token for lookup: $($_.Exception.Message)"
     throw "An exception occurred while fetching access token for lookup: $($_.Exception.Message)"
 }
 
@@ -73,7 +73,7 @@ try {
 
     $lookupResponse = Invoke-RestMethod -Method GET -Uri $Uri -Headers $reqHeaders
 
-    #$lookupResponse
+    $lookupResponse
 
     if ($lookupResponse) {
         if ($FirstOrDefault -eq 'true') {
@@ -95,5 +95,6 @@ try {
     #$env:GITHUB_OUTPUT
 }
 catch {
-    Write-Host "An exception occurred while fetching lookup values $($_.Exception.Message)"
+    Write-Error "An exception occurred while fetching lookup values $($_.Exception.Message)"
+    throw "An exception occurred while fetching lookup values $($_.Exception.Message)"
 }

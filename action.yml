@@ -1,6 +1,6 @@
 name: "Leap Query Lookup"
 author: RapidCircle
-description: "Get Lookup Value"
+description: "Get Desired Lookup Value"
 inputs:
   TenantId:
     description: "TenantId"
@@ -34,6 +34,10 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: validate-inputs
+      shell: bash
+      run: |
+        [[ "${{ inputs.TableName }}" ]] || { echo "TableName input is required" ; exit 1; }
     - name: Query Lookup Table
       id: fetch-lookup-value
       shell: pwsh
