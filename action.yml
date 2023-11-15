@@ -2,33 +2,33 @@ name: "Leap Query Lookup"
 author: RapidCircle
 description: "Get Desired Lookup Value"
 inputs:
-  TenantId:
+  Leap_TenantId:
     description: "TenantId"
     required: true
-  ClientId:
+  Leap_ClientId:
     description: "ClientId"
     required: true
-  ClientSecret:
+  Leap_ClientSecret:
     description: "ClientSecret"
     required: true
-  LookupServiceIdentifier:
+  Leap_LookupServiceIdentifier:
     description: "Lookup Service Identifier"
     required: true
-  HostURL:
+  Leap_HostURL:
     description: "HostURL"
     required: true
-  TableName:
+  Leap_TableName:
     description: "Name of the lookup table"
     required: true
-  Query:
+  Leap_Query:
     description: "Lookup table query"
     required: false
     default: ""
-  FirstOrDefault:
+  Leap_FirstOrDefault:
     description: "If this flag is set to false, get all items that meet query from Lookup table"
     required: false
 outputs:
-  LookupTableValueJSON:
+  Leap_LookupTableValueJSON:
     description: "Lookup Value"
     value: ${{ steps.fetch-lookup-value.outputs.LookupValue }}
 runs:
@@ -38,12 +38,12 @@ runs:
       id: fetch-lookup-value
       shell: pwsh
       env:
-        HostURL: ${{ inputs.HostURL }}
-        TableName: ${{ inputs.TableName }}
-        Query: ${{ inputs.Query }}
-        TenantId: ${{ inputs.TenantId }}
-        ClientId: ${{ inputs.ClientId }}
-        ClientSecret: ${{ inputs.ClientSecret }}
-        LookupServiceIdentifier: ${{ inputs.LookupServiceIdentifier }}
-        FirstOrDefault: ${{ inputs.FirstOrDefault }}
+        HostURL: ${{ inputs.Leap_HostURL }}
+        TableName: ${{ inputs.Leap_TableName }}
+        Query: ${{ inputs.Leap_Query }}
+        TenantId: ${{ inputs.Leap_TenantId }}
+        ClientId: ${{ inputs.Leap_ClientId }}
+        ClientSecret: ${{ inputs.Leap_ClientSecret }}
+        LookupServiceIdentifier: ${{ inputs.Leap_LookupServiceIdentifier }}
+        FirstOrDefault: ${{ inputs.Leap_FirstOrDefault }}
       run: ${{ github.action_path }}/script/Query-LookupTable.ps1
